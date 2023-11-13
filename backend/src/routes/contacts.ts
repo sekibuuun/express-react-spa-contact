@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    res.json({});
+    res.json(await prisma.contact.findMany());
   } catch (err) {
     next(err);
   }

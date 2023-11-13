@@ -5,7 +5,7 @@ import logger from "morgan";
 import cors from "cors"
 
 import { router as indexRouter } from "./routes/index";
-import { router as usersRouter } from "./routes/users";
+import { router as contactsRouter } from "./routes/contacts";
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(cors())
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/contacts", contactsRouter);
 
 app.use(function (req, res, next) {
   next(createError(404));

@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  const taro = await prisma.user.upsert({
+  const taro = await prisma.contact.upsert({
     where: { email: "taro@example.com" },
     update: {},
     create: {
@@ -11,7 +11,7 @@ async function main() {
     },
   });
 
-  const jiro = await prisma.user.upsert({
+  const jiro = await prisma.contact.upsert({
     where: { email: "jiro@example.com" },
     update: {},
     create: {
@@ -20,6 +20,23 @@ async function main() {
     },
   });
   console.log({ taro, jiro });
+
+  const personal = await prisma.category.upsert({
+    where: { name: "personal" },
+    update: {},
+    create: {
+      name: "personal",
+    },
+  });
+
+  const business = await prisma.category.upsert({
+    where: { name: "business" },
+    update: {},
+    create: {
+      name: "business",
+    },
+  });
+  console.log({ personal, business });
 }
 
 main()
