@@ -1,10 +1,9 @@
 import express from "express";
-import { PrismaClient } from "@prisma/client";
+import { getPrismaCilent } from "../lib/prisma-util";
 
-const prisma = new PrismaClient();
+const prisma = getPrismaCilent();
 const router = express.Router();
 
-/* GET home page. */
 router.get("/", async (req, res, next) => {
   try {
     const users = await prisma.user.findMany();
