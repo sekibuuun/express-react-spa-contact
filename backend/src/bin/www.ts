@@ -7,7 +7,7 @@
 import app from "../app";
 import * as http from "http";
 import * as debugModule from "debug";
-var debug = debugModule.debug("quick-start-express-typescript:server");
+const debug = debugModule.debug("express-react-spa-contact:server");
 
 /**
  * Get port from environment and store in Express.
