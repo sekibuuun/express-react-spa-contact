@@ -16,20 +16,14 @@ app.use(cookieParser());
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
-// catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// ↓ 下のapp.use((err, req, res, next)=>{...})の引数errに付けるオブジェクトの型。
-// errに付ける型として、vscode内のErrorというオブジェクト型があるが、statusというプロパティが無いため、拡張したinterfaceを定義している。
 interface ErrorWithStatus extends Error {
   status: number;
 }
 
-// error handler
-// ↓に関しては、このままだと全引数ともに暗黙的Anyとなってしまう。
-// req,res,nextに関しては@types/expressの型を使えるが、errに関しては型拡張の必要あり！(上で定義したinterfaceを用いる。)
 app.use(function (
   err: ErrorWithStatus,
   req: Request,
@@ -42,7 +36,7 @@ app.use(function (
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.json({ status: "NG", message: "fatal error" });
 });
 
 export default app;
