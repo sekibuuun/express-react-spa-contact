@@ -2,6 +2,7 @@ import createError from "http-errors";
 import express, { Request, Response, NextFunction } from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
+import cors from "cors"
 
 import { router as indexRouter } from "./routes/index";
 import { router as usersRouter } from "./routes/users";
@@ -12,6 +13,8 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(cors())
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
