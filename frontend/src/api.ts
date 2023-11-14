@@ -28,7 +28,10 @@ const wrapPromise = <T>(promise: Promise<T>) => {
   };
 };
 
-export const request = async <T>(path: string, init?: RequestInit): Promise<T> => {
+export const request = async <T>(
+  path: string,
+  init?: RequestInit
+): Promise<T> => {
   const ret = await fetch(`http://localhost:8000/${path}`, init);
   if (!ret.ok) {
     throw new Error("Request failed");
@@ -50,6 +53,17 @@ export const generateSuspended = <T>(
   };
 };
 
-export const requestGetContacts = () => request<Contact[]>("contacts");
+const apiPort = 8000;
 
-export const getContacts = generateSuspended(requestGetContacts, "requestGetContacts");
+export const requestGetContacts = async () => {
+  const ret = await fetch(`http://localhost:${apiPort}/contacts`);
+  if (!ret.ok) {
+    throw new Error("Request failed");
+  }
+  return (await ret.json()) as Contact[];
+};
+
+export const getContacts = generateSuspended(
+  requestGetContacts,
+  "requestGetContacts"
+);
