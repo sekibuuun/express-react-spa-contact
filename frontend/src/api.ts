@@ -28,8 +28,8 @@ const wrapPromise = <T>(promise: Promise<T>) => {
   };
 };
 
-export const requestGet = async <T>(path: string): Promise<T> => {
-  const ret = await fetch(`http://localhost:8000/${path}`);
+export const request = async <T>(path: string, init?: RequestInit): Promise<T> => {
+  const ret = await fetch(`http://localhost:8000/${path}`, init);
   if (!ret.ok) {
     throw new Error("Request failed");
   }
@@ -50,6 +50,6 @@ export const generateSuspended = <T>(
   };
 };
 
-export const requestGetContacts = () => requestGet<Contact[]>("contacts");
+export const requestGetContacts = () => request<Contact[]>("contacts");
 
-export const getContacts = generateSuspended(requestGetContacts, "contacts");
+export const getContacts = generateSuspended(requestGetContacts, "requestGetContacts");

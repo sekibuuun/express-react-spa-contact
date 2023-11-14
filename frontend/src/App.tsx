@@ -19,7 +19,9 @@ function ContactList() {
     <ul>
       {contacts.map((contact) => (
         <li key={contact.id}>
-          <div>{contact.name}</div>
+          <div style={{ color: "blue" }}>
+            {contact.name} | {contact.email}
+          </div>
         </li>
       ))}
     </ul>

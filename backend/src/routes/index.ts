@@ -1,12 +1,11 @@
 import express from "express";
 import { getPrismaCilent } from "../lib/prisma-util";
 
-const prisma = getPrismaCilent();
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    res.json({});
+    res.json({ message: "Hello World" });
   } catch (err) {
     next(err);
   }
