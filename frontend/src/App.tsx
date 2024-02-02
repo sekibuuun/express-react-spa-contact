@@ -9,6 +9,7 @@ function App() {
       <Suspense fallback={<div>Loading...</div>}>
         <ContactList />
       </Suspense>
+      <ArrayComponents />
     </>
   );
 }
@@ -41,6 +42,18 @@ function ContactItem({ contact }: ContactItemProps) {
       {contact.name} | {contact.email}
     </div>
   );
+}
+
+function ArrayComponents () {
+  const names = ["Alice", "Bob", "Carl"];
+
+  return (
+    <div>
+      {names.map((name) => (
+          <li>{name}</li>
+      ))}
+    </div>
+  )
 }
 
 export default App;
