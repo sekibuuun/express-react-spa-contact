@@ -1,6 +1,6 @@
-import { Suspense, useState} from "react";
+import { Suspense, useState } from "react";
 import { getContacts } from "./api";
-import { Contact } from "./type"
+import { Contact } from "./type";
 
 function App() {
   return (
@@ -28,32 +28,37 @@ function ContactList() {
   );
 }
 
-
 type ContactItemProps = { contact: Contact };
 
 function ContactItem({ contact }: ContactItemProps) {
   const [color, setColor] = useState("blue");
   const handleClick = () => {
     console.log("onClick!");
-    setColor("red");
-  }
+    {
+      color === "red" ? setColor("blue") : setColor("red");
+    }
+  };
   return (
-    <div style={{ color: color }} onClick={handleClick}>
+    <div style={{ color }} onClick={handleClick}>
       {contact.name} | {contact.email}
     </div>
   );
 }
 
-function ArrayComponents () {
-  const names = ["Alice", "Bob", "Carl"];
+function ArrayComponents() {
+  const [names, setNames] = useState(["Alice", "Bob", "Carl"]);
+  const addList = () => {
+    setNames([...names, "test"]);
+  };
 
   return (
     <div>
       {names.map((name) => (
-          <li>{name}</li>
+        <li>{name}</li>
       ))}
+      <button onClick={addList}>追加</button>
     </div>
-  )
+  );
 }
 
 export default App;
