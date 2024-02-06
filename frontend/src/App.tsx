@@ -10,10 +10,14 @@ function App() {
         <ContactList />
       </Suspense>
       <Frame>
-        <ArrayComponents />
+        <BackgroundColorComponent color={"red"}>
+          <ArrayComponents />
+        </BackgroundColorComponent>
       </Frame>
       <Frame>
-        <ObjectComponent />
+        <BackgroundColorComponent color={"blue"}>
+          <ObjectComponent />
+        </BackgroundColorComponent>
       </Frame>
     </>
   );
@@ -94,6 +98,16 @@ function ObjectComponent() {
       <button onClick={addAge}>addAge</button>
     </div>
   );
+}
+
+function BackgroundColorComponent({
+  children,
+  color,
+}: {
+  children: ReactNode;
+  color: string;
+}) {
+  return <div style={{ background: color }}>{children}</div>;
 }
 
 export default App;
