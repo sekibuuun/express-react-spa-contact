@@ -10,6 +10,7 @@ function App() {
         <ContactList />
       </Suspense>
       <ArrayComponents />
+      <ObjectComponent />
     </>
   );
 }
@@ -57,6 +58,28 @@ function ArrayComponents() {
         <li>{name}</li>
       ))}
       <button onClick={addList}>追加</button>
+    </div>
+  );
+}
+
+type personInfo = {
+  name: String;
+  age: number;
+};
+
+function ObjectComponent() {
+  const [person, setPerson] = useState<personInfo>({ name: "me", age: 40 });
+  const addAge = () => {
+    setPerson({ ...person, age: person.age + 1 }); // person.age++ だと動かない
+    console.log(person.age);
+  };
+
+  return (
+    <div>
+      <p>
+        {person.name}: {person.age}
+      </p>
+      <button onClick={addAge}>addAge</button>
     </div>
   );
 }
