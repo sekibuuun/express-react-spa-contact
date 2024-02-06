@@ -1,4 +1,4 @@
-import { Suspense, useState } from "react";
+import { ReactNode, Suspense, useState } from "react";
 import { getContacts } from "./api";
 import { Contact } from "./type";
 
@@ -9,9 +9,21 @@ function App() {
       <Suspense fallback={<div>Loading...</div>}>
         <ContactList />
       </Suspense>
-      <ArrayComponents />
-      <ObjectComponent />
+      <Frame>
+        <ArrayComponents />
+      </Frame>
+      <Frame>
+        <ObjectComponent />
+      </Frame>
     </>
+  );
+}
+
+function Frame({ children }: { children: ReactNode }) {
+  return (
+    <div style={{ border: "1px solid black", margin: "10px", padding: "5px" }}>
+      {children} {/* ここの内容が置き換わる */}
+    </div>
   );
 }
 
